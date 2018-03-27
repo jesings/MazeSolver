@@ -9,12 +9,22 @@ When I am asked to find a path from a starting tile to an ending tile in a maze,
 ## algorithm
 Maze predefined, with a set ending position
 solveMaze(startingPosition):
+
       if endingPosition tile is the startingPosition:
+      
          record
+	 
          return
+	 
       if startingPosition is a barrier:
+      
          return
+	 
       place barrier on starting position
+      
       for each adjacent tile:
+      
           solveMaze(thatTile)
+	  
       remove barrier on starting position
+      
