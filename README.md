@@ -8,23 +8,14 @@ Yoshiya Ohno, Jonathan Singer, Mark Winter
 When I am asked to find a path from a starting tile to an ending tile in a maze, the recursive abstraction can find a path from a tile adjacent to the starting tile to the same ending tile in that maze.
 ## algorithm
 Maze predefined, with a set ending position
-solveMaze(startingPosition):
 
+solveMaze(startingPosition):
       if endingPosition tile is the startingPosition:
-      
          record
-	 
          return
-	 
       if startingPosition is a barrier:
-      
          return
-	 
       place barrier on starting position
-      
       for each adjacent tile:
-      
           solveMaze(thatTile)
-	  
       remove barrier on starting position
-      
