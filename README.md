@@ -7,10 +7,7 @@ Looping through possible paths is disallowed.
 ## recursive abstraction
 When I am asked to find a path from a starting tile to an ending tile in a maze, the recursive abstraction can find a path from a tile adjacent to the starting tile to the same ending tile in that maze.
 ## base case
-## English or pseudocode description of algorithm
-## class(es), with fields and methods
-## version*n* wish list
-## algorithm
+## pseudocode description of algorithm
 Maze predefined, with a set ending position
 ```
 solveMaze(startingPosition):
@@ -24,3 +21,6 @@ solveMaze(startingPosition):
           solveMaze(thatTile)
       remove barrier on starting position
 ```
+## class(es), with fields and methods
+## version1 planned features
+## version*n* wish list
