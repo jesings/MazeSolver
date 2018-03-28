@@ -29,5 +29,5 @@ solveMaze(startingPosition):
       remove barrier on starting position
 ```
 ## class(es), with fields and methods
-## version1 planned features
+## version0 planned features
 ## version*n* wish list
