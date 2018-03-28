@@ -31,3 +31,4 @@ solveMaze(startingPosition):
 ## class(es), with fields and methods
 ## version0 planned features
 ## version*n* wish list
+Instead of placing a barrier behind the explorer, instead place something else so that the path the explorer takes is recorded. 
