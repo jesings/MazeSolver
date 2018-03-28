@@ -2,11 +2,18 @@
 Yoshiya Ohno, Jonathan Singer, Mark Winter
 ## statement of problem
 The problem is to find a way to return the boolean value of the statement "there exists one path through the maze from a designated start point to a designated end point."
+
 A maze is defined as a grid with barriers.
+
 Looping through possible paths is disallowed.
 ## recursive abstraction
 When I am asked to find a path from a starting tile to an ending tile in a maze, the recursive abstraction can find a path from a tile adjacent to the starting tile to the same ending tile in that maze.
 ## base case
+Tile to find path from is either of
+
+* designated end point
+
+* barrier
 ## pseudocode description of algorithm
 Maze predefined, with a set ending position
 ```
@@ -22,5 +29,5 @@ solveMaze(startingPosition):
       remove barrier on starting position
 ```
 ## class(es), with fields and methods
-## version1 planned features
+## version0 planned features
 ## version*n* wish list
