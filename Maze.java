@@ -19,6 +19,7 @@ public class Maze {
     public final static int TREASURE = 0;
     public final static int WALL = 1;
     public final static int STEPPING_STONE = 2;
+	public final static int TRACER = 3;
     
     // directions that can be searched
     public final static int EAST =  1;
@@ -33,7 +34,7 @@ public class Maze {
     private final static int MAX_RANKS = 64;
     private int rankCount;  // number of ranks in a constructed Maze
     
-    private Vector explorerPosition;  // see Vector inner class, below
+    public Vector explorerPosition;  // see Vector inner class, below
 
     /**
       Construct an instance from the contents of a file.
@@ -108,9 +109,9 @@ public class Maze {
         /* characters that represent elements of the maze,
            indexed by the numbers used to represent elements
           */
-        final String outChar = "0 *";  // no explorer here
-        final String exOnTop = "!Ee";  /* explorer on top of
-           treasure, wall, stepping stone, etc. */
+        final String outChar = "0 *X";  // no explorer here ///////////////EXTRA Zs
+        final String exOnTop = "!Ee3";  /* explorer on top of /////////////FOR TESTING
+           treasure, wall, stepping stone, etc. *////////////////////////////////////////WHAT THE HELL THAT FIXED IT
 
         // build string for top and bottom separators
         String aboveAndBelow = "-";
@@ -126,7 +127,7 @@ public class Maze {
                 int elem = maze[ rank][ file];
                 
                 // choose from the appropriate character set,
-                if(    explorerPosition != null
+                if(    explorerPosition.eval() != null
                     && explorerPosition.equals( rank, file)
                   )
                      result += exOnTop.substring( elem, elem+1);
@@ -180,7 +181,7 @@ public class Maze {
               from that equivalence.
      */
     public int explorerIsOnA() {
-        if( explorerPosition == null) return WALL;
+        if( explorerPosition.eval() == null) return WALL;
         else return maze[ explorerPosition.rank][ explorerPosition.file];
     }
 
@@ -191,8 +192,8 @@ public class Maze {
          o  a location in a maze, being a displacement from (0,0)
        A location outside the maze is represented by a null Vector.
      */
-    private class Vector {
-        private int rank, file;
+    public class Vector {
+        public int rank, file;
         
         // The no-arg constructor produces [0, 0] 
         private Vector() {}
@@ -218,12 +219,18 @@ public class Maze {
                               // + ", " +    file + " / " + maze[ rank].length );
             
             // still in bounds?
-            if(    0 <= rank && rank < rankCount
-                && 0 <= file && file < maze[ rank].length
-              )  return this;
-            else return null;  // outside maze
+            /*if(    0 <= rank && rank < rankCount
+                && 0 <= file && file < maze[ rank].length //d//e//l//e//t//////////////t//h//i//s//////////delet this!
+              ) delet this*/  return this;
+            //else return null;  // outside maze
         }
-
+		
+		private Vector eval() {
+			if(    0 <= rank && rank < rankCount
+                && 0 <= file && file < maze[ rank].length
+              ) return this;
+			else return null;
+		}
 
         /**
           @return whether this Vector matches the parameters
