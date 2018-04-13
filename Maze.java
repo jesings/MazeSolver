@@ -169,7 +169,7 @@ public class Maze {
       @return the direction cardinally opposite @direction.
       NORTH to SOUTH, etc.
       */
-    public int oppositeOf( int direction) {
+    public static int oppositeOf( int direction) {
         return -1 * direction;
     }
 
