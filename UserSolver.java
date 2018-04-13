@@ -10,8 +10,13 @@ its worth the practice anyway
 
 public abstract class UserSolver{
     //uhh
-    public static void main(String[] args) throws java.io.FileNotFoundException {
-        MazeSolver.solve( new Maze("mazes/testMaze.txt", 0, 0) );
+    public static void main(String[] commandLine) throws java.io.FileNotFoundException {
+        Maze maze = new Maze( commandLine[0]
+                            , Integer.parseInt( commandLine[1])
+                            , Integer.parseInt( commandLine[2])
+                            );
+
+        MazeSolver.solve( maze);
     }
     //cool
 }
