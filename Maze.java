@@ -19,16 +19,18 @@ public class Maze {
     public final static int TREASURE = 0;
     public final static int WALL = 1;
     public final static int STEPPING_STONE = 2;
-	public final static int TRACER = 3;
+    public final static int TRACER = 3;
     
     // directions that can be searched
     public final static int EAST =  1;
-    public final static int NORTH = 2;
-    public final static int WEST =  4;
-    public final static int SOUTH = 8;
-       /* Values are pretty arbitrary. Values of 2^n might be useful
-          in the unlikely event that we ever want to add north-west, etc.:
-          2+4 --> 6  */
+    public final static int NORTH = 3;
+    public final static int WEST =  -1;
+    public final static int SOUTH = -3;
+       /* Values are pretty arbitrary. 
+        * East/West and North/South are opposites to make oppositeOf() simpler.
+        * values |1| and |3| are chosen in case diagonals are needed;
+        *   NE/SW become |4| and NW/SE become |2|.
+        */
     
     private int[][] maze;
     private final static int MAX_RANKS = 64;
@@ -75,7 +77,7 @@ public class Maze {
             }
         }
         
-        explorerPosition = new Vector().add( explorerRank, explorerFile);
+        explorerPosition = new Vector( explorerRank, explorerFile);
         // // for debugging: report explorer's location
         // System.out.println( "explorer at " + explorerPosition.rank
                           // + ", " +           explorerPosition.file);
@@ -163,6 +165,14 @@ public class Maze {
         }
     }
 
+    /**
+      @return the direction cardinally opposite @direction.
+      NORTH to SOUTH, etc.
+      */
+    public int oppositeOf( int direction) {
+        return -1 * direction;
+    }
+
 
     /**
       Modify the maze to have @mazeElement in the explorer's position.
@@ -190,10 +200,11 @@ public class Maze {
        a pair of rank & file that can represent...
          o  a displacement from the current location
          o  a location in a maze, being a displacement from (0,0)
-       A location outside the maze is represented by a null Vector.
+       Vectors outside the maze are legal and do exist, but eval() to null,
+       representing their out-of-bounds-ness.
      */
     public class Vector {
-        public int rank, file;
+        private int rank, file;
         
         // The no-arg constructor produces [0, 0] 
         private Vector() {}
@@ -204,11 +215,10 @@ public class Maze {
             file = old.file;
         }
 
-        /* For other rank and file values, use add so that the Vector
-           will be null if the displacement exceeds the maze bounds.
-           There is no constructor with rank and file arguments because
-           a constructor cannot produce a null.
-         */
+        private Vector( int rank, int file) {
+            this.rank = rank;
+            this.file = file;
+        }
 
         private Vector add( int ranks, int files) { 
             rank += ranks;
@@ -218,19 +228,15 @@ public class Maze {
             // System.out.println( "sum: " + rank + " / " + rankCount
                               // + ", " +    file + " / " + maze[ rank].length );
             
-            // still in bounds?
-            /*if(    0 <= rank && rank < rankCount
-                && 0 <= file && file < maze[ rank].length //d//e//l//e//t//////////////t//h//i//s//////////delet this!
-              ) delet this*/  return this;
-            //else return null;  // outside maze
+            return this;
         }
 		
-		private Vector eval() {
-			if(    0 <= rank && rank < rankCount
+        private Vector eval() {
+            if(    0 <= rank && rank < rankCount
                 && 0 <= file && file < maze[ rank].length
               ) return this;
-			else return null;
-		}
+            else return null;
+        }
 
         /**
           @return whether this Vector matches the parameters
