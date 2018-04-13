@@ -7,7 +7,6 @@ now using knowledge of compass opposites
 */
 
 public abstract class MazeSolver{
-    /////////////god damn im going to need a wrapper arent I 
     /**
     sets up the big solve
     */
@@ -15,9 +14,6 @@ public abstract class MazeSolver{
     public static boolean solve(Maze inMaze){
         return solve(inMaze, 0) > 0;
     }    
-    
-    /////cheeki compass over here no peeking/////////////
-    private static final int[] compass = new int[] {Maze.EAST,Maze.NORTH,Maze.WEST,Maze.SOUTH};
     
     /**
     doing the big solve
@@ -31,6 +27,7 @@ public abstract class MazeSolver{
 
             case Maze.WALL:
                 break;
+				
             case Maze.TRACER:
                 break;
 
@@ -38,10 +35,10 @@ public abstract class MazeSolver{
                 solns++;
                 System.out.println("got one");    
                 break;
-
+				
             case Maze.STEPPING_STONE:
                 inMaze.dropA(Maze.TRACER);
-                for (int dir : compass ) {
+                for (int dir : Maze.compass ) {
                     inMaze.go(dir);
                     solns = solve(inMaze, solns);
                     inMaze.go( Maze.oppositeOf(dir));
@@ -49,7 +46,6 @@ public abstract class MazeSolver{
                 inMaze.dropA(Maze.STEPPING_STONE);
                 break;
         }
-
     return solns;
     }
 }

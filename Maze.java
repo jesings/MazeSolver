@@ -26,6 +26,10 @@ public class Maze {
     public final static int NORTH = 3;
     public final static int WEST =  -1;
     public final static int SOUTH = -3;
+	
+	//compass is a list of the directions in no particular order.
+    public static final int[] compass = new int[] {Maze.EAST,Maze.NORTH,Maze.WEST,Maze.SOUTH};
+    
        /* Values are pretty arbitrary. 
         * East/West and North/South are opposites to make oppositeOf() simpler.
         * values |1| and |3| are chosen in case diagonals are needed;
@@ -73,6 +77,7 @@ public class Maze {
                 else if( inChar.equals("*"))  element = STEPPING_STONE;
                 // spaces and unrecognised characters are walls
                 else                          element = WALL;
+				//tracers are not considered because they only generate from explorer movement
                 maze[ rank][ file] = element;
             }
         }
@@ -111,10 +116,10 @@ public class Maze {
         /* characters that represent elements of the maze,
            indexed by the numbers used to represent elements
           */
-        final String outChar = "0 *X";  // no explorer here ///////////////EXTRA Zs
-        final String exOnTop = "!Ee3";  /* explorer on top of /////////////FOR TESTING
-           treasure, wall, stepping stone, etc. *////////////////////////////////////////WHAT THE HELL THAT FIXED IT
-
+        final String outChar = "0 *X";  // treasure, wall, stepping stone, and tracer
+        final String exOnTop = "!EeE";  /* explorer on top of 
+           treasure, wall, stepping stone, and tracer */
+		   
         // build string for top and bottom separators
         String aboveAndBelow = "-";
         for( int file = 0; file < maze[0].length; file++)
@@ -129,7 +134,7 @@ public class Maze {
                 int elem = maze[ rank][ file];
                 
                 // choose from the appropriate character set,
-                if(    explorerPosition.eval() != null
+                if(    explorerPosition.eval() != null //"if in the literally recorded maze"
                     && explorerPosition.equals( rank, file)
                   )
                      result += exOnTop.substring( elem, elem+1);
@@ -186,7 +191,8 @@ public class Maze {
 
     /**
       @return the MazeElement that the explorer is on.
-              When the explorer's position is null, return WALL
+              When the explorer's position is outside
+			  of the literally recorded maze array, return WALL
               because the user-programmer's code is expected to benefit
               from that equivalence.
      */
@@ -203,7 +209,7 @@ public class Maze {
        Vectors outside the maze are legal and do exist, but eval() to null,
        representing their out-of-bounds-ness.
      */
-    public class Vector {
+    private class Vector {
         private int rank, file;
         
         // The no-arg constructor produces [0, 0] 
