@@ -6,12 +6,17 @@ No known bugs (Not for lack of trying to find any, though). It doesn't work with
 Cont total number of paths (record increments a solution counter)
 ## version1 planned features
 Keep track of solutions in a List
+
 Keep track of path lengths
+
 Use `Displayer` to display all solutions once the solving is complete
 ## version*n* wish list
 Add directional tracers so the explorer's exact path can be visualized.
+
 Sort final solutions by length
+
 "Screw around with maze geometry"
+
 Add maze features
 ## statement of problem
 The problem is to find a way to return the boolean value of the statement "there exists one path through the maze from a designated start point to a designated end point."
