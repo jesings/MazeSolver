@@ -17,7 +17,7 @@ public abstract class MazeSolver{
     }    
     
     /////cheeki compass over here no peeking/////////////
-    private static final int[] compass = new int[] {Maze.EAST,Maze.NORTH,Maze.WEST,Maze.SOUTH};
+    private static final Maze.Directions[] compass = new Maze.Directions[] {Maze.Directions.EAST,Maze.Directions.NORTH,Maze.Directions.WEST,Maze.Directions.SOUTH};
     
     /**
     doing the big solve
@@ -41,7 +41,7 @@ public abstract class MazeSolver{
 
             case Maze.STEPPING_STONE:
                 inMaze.dropA(Maze.TRACER);
-                for (int dir : compass ) {
+                for (Maze.Directions dir : compass ) {
                     inMaze.go(dir);
                     solns = solve(inMaze, solns);
                     inMaze.go( Maze.oppositeOf(dir));

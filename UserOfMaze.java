@@ -41,30 +41,30 @@ public class UserOfMaze {
           java UserOfMaze mazes/intersection_treasureNorth.txt 1 1
      */
     private static void moveTest( Maze maze) {
-        maze.go( Maze.EAST);
+        maze.go( Maze.Directions.EAST);
         System.out.println( "go east"
                           + ", leaving explorer on a " + maze.explorerIsOnA()
                           +      System.lineSeparator()
                           + maze + System.lineSeparator());
-        maze.go( Maze.NORTH);
+        maze.go( Maze.Directions.NORTH);
         System.out.println( "go north"
                           + ", leaving explorer on a " + maze.explorerIsOnA()
                           +      System.lineSeparator()
                           + maze + System.lineSeparator());
-        maze.go( Maze.WEST);
+        maze.go( Maze.Directions.WEST);
         System.out.println( "go west"
                           + ", leaving explorer on a " + maze.explorerIsOnA()
                           +      System.lineSeparator()
                           + maze + System.lineSeparator());
-        maze.go( Maze.SOUTH);
+        maze.go( Maze.Directions.SOUTH);
         System.out.println( "go south"
                           + ", leaving explorer on a " + maze.explorerIsOnA()
                           +      System.lineSeparator()
                           + maze + System.lineSeparator());
 
         // step out of the maze
-        maze.go( Maze.SOUTH);
-        maze.go( Maze.SOUTH);
+        maze.go( Maze.Directions.SOUTH);
+        maze.go( Maze.Directions.SOUTH);
         System.out.println( "outside"
                           + ", leaving explorer \"on\" a " + maze.explorerIsOnA()
                           +      System.lineSeparator()
@@ -107,8 +107,8 @@ public class UserOfMaze {
         Maze copy = new Maze( old);
 
         // change the old
-        old.go( Maze.NORTH);
-        old.dropA( Maze.WALL);
+        old.go( Maze.Directions.NORTH);
+        old.dropA( Maze.Directions.WALL);
         System.out.println(
                             "modified old" + System.lineSeparator()
                           + old + System.lineSeparator()
@@ -117,8 +117,8 @@ public class UserOfMaze {
                           );
 
         // change the copy
-        copy.go( Maze.SOUTH);
-        copy.go( Maze.WEST);
+        copy.go( Maze.Directions.SOUTH);
+        copy.go( Maze.Directions.WEST);
         copy.dropA( Maze.STEPPING_STONE);
         System.out.println(
                             "modified copy" + System.lineSeparator()
@@ -141,7 +141,7 @@ public class UserOfMaze {
 
         // move past west edge, Displaying as we go
         while( step < 5) {
-            m.go( Maze.WEST);
+            m.go( Maze.Directions.WEST);
             displayer.atTopOfWindow( m + "step " + step++);
         }
     }
@@ -159,7 +159,7 @@ public class UserOfMaze {
         // throw new java.lang.RuntimeException(
         //     "Write code to take a snapshot of @candidate. "
         //   + "Then, in @candidate, have the explorer go() out of the maze.");
-        candidate.go(Maze.NORTH);
+        candidate.go(Maze.Directions.NORTH);
         System.out.println(
                             "modified candidate with no explorer"
                           + System.lineSeparator()
