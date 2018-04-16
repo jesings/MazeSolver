@@ -6,15 +6,46 @@ now using knowledge of compass opposites
 
 */
 
-public abstract class MazeSolver{
-    /////////////god damn im going to need a wrapper arent I 
+public class MazeSolver{
+
+    // Fields
+    Maze maze;
+    Displayer display;
+
     /**
-    sets up the big solve
+     construct a MazeSolver,
+     capable of solving the given maze
+     and outputting to a @display -sized display.
+     */
+    public MazeSolver( String filename
+                     , int explorerRank, int explorerFile
+                     , int displaySize
+                     ) throws java.io.FileNotFoundException {
+
+        maze = new Maze( filename, explorerRank, explorerFile);
+        display = new Displayer(displaySize);
+     }
+
+    /**
+     Solves the maze given by the command-line args.
+     I've lost track of methods a bit which is not great
+     But I do think it makes sense for this class to have its own main() method
+     So there's only this one file to run from the command line.
     */
-        
-    public static boolean solve(Maze inMaze){
-        return solve(inMaze, 0) > 0;
-    }    
+    public static void main( String[] commandLine) throws java.io.FileNotFoundException {
+        MazeSolver jef = new MazeSolver( commandLine[0]
+                                         , Integer.parseInt( commandLine[1])
+                                         , Integer.parseInt( commandLine[2])
+                                         , Integer.parseInt( commandLine[3])
+                                       );
+        jef.display.atTopOfWindow( "total solutions: " + Integer.toString(jef.solve()));
+    }
+
+    // I'm getting a bit lost in the static/non-static divide which is not good
+    
+    private int solve() {
+        return solve( maze, 0);
+    }
     
     /////cheeki compass over here no peeking/////////////
     private static final int[] compass = new int[] {Maze.EAST,Maze.NORTH,Maze.WEST,Maze.SOUTH};
@@ -23,9 +54,13 @@ public abstract class MazeSolver{
     doing the big solve
     */
     
-    private static int solve(Maze inMaze, int solns) {
-        System.out.println(solns);
-        System.out.println(inMaze.toString());
+    private int solve(Maze inMaze, int solns) {
+        display.atTopOfWindow( 
+                             ""
+                             + solns
+                             + System.lineSeparator()
+                             + inMaze
+                             );
 
         switch(inMaze.explorerIsOnA()) {
 
@@ -36,7 +71,7 @@ public abstract class MazeSolver{
 
             case Maze.TREASURE:
                 solns++;
-                System.out.println("got one");    
+                // System.out.println("got one");    
                 break;
 
             case Maze.STEPPING_STONE:
