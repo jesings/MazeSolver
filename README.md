@@ -30,5 +30,7 @@ solveMaze(startingPosition):
 ## class(es), with fields and methods
 ## version0 planned features
 Cont total number of paths (record increments a solution counter)
+## V1
+Implements Display, uses enum for directions.
 ## version*n* wish list
 Instead of placing a barrier behind the explorer, instead place something else so that the path the explorer takes is recorded. 
